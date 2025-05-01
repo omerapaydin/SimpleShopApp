@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="162" width="393" height="622"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="61" id="HMv-Zr-agn">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="61" id="HMv-Zr-agn" customClass="TableViewCell" customModule="SimpleShopApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HMv-Zr-agn" id="VdE-6p-tQm">
@@ -44,6 +44,9 @@
                                                 <constraint firstItem="TiS-uZ-giW" firstAttribute="top" secondItem="VdE-6p-tQm" secondAttribute="topMargin" constant="-3" id="uX8-DE-9Ag"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="adLabel" destination="TiS-uZ-giW" id="OZX-WI-jmd"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -66,6 +69,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="PqA-Ww-dr9" id="UAZ-78-sEM"/>
                         <segue destination="liK-de-ykx" kind="show" identifier="toList" id="pPF-pH-OGf"/>
                     </connections>
                 </viewController>
@@ -76,46 +80,68 @@
         <!--Add Item-->
         <scene sceneID="0xy-6V-Cs5">
             <objects>
-                <viewController id="e8h-Uy-r5R" sceneMemberID="viewController">
+                <viewController id="e8h-Uy-r5R" customClass="AddViewController" customModule="SimpleShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z96-qC-TBE">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ds8-7d-NnH">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select" translatesAutoresizingMaskIntoConstraints="NO" id="Ds8-7d-NnH">
                                 <rect key="frame" x="53" y="206" width="287" height="288"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-qY-dI1">
-                                <rect key="frame" x="53" y="551" width="287" height="34"/>
+                                <rect key="frame" x="53" y="529" width="287" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Nky-A8-Dr8"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ocy-H2-uoa">
-                                <rect key="frame" x="133" y="635" width="127" height="59"/>
+                                <rect key="frame" x="133" y="673" width="127" height="59"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="59" id="gLH-8I-gVt"/>
+                                    <constraint firstAttribute="height" constant="59" id="tt9-z4-IFI"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Add">
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="add:" destination="e8h-Uy-r5R" eventType="touchUpInside" id="d8n-DB-S5N"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebY-Vr-d9J">
+                                <rect key="frame" x="53" y="594" width="287" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Unh-4o-X2f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9dW-EH-fXB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="top" secondItem="9dW-EH-fXB" secondAttribute="top" constant="44" id="97E-L5-vDa"/>
-                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="trailing" secondItem="Dga-qY-dI1" secondAttribute="trailing" id="OV8-KI-y3Z"/>
-                            <constraint firstItem="Dga-qY-dI1" firstAttribute="top" secondItem="Ds8-7d-NnH" secondAttribute="bottom" constant="57" id="QvS-5n-PNe"/>
-                            <constraint firstItem="ocy-H2-uoa" firstAttribute="leading" secondItem="9dW-EH-fXB" secondAttribute="leading" constant="133" id="Uxn-z6-nNA"/>
-                            <constraint firstItem="ocy-H2-uoa" firstAttribute="top" secondItem="Dga-qY-dI1" secondAttribute="bottom" constant="50" id="VLZ-SL-FH9"/>
-                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="leading" secondItem="Dga-qY-dI1" secondAttribute="leading" id="Zx8-8u-7w0"/>
-                            <constraint firstItem="Dga-qY-dI1" firstAttribute="centerX" secondItem="ocy-H2-uoa" secondAttribute="centerX" id="iUd-hd-73s"/>
-                            <constraint firstItem="9dW-EH-fXB" firstAttribute="bottom" secondItem="ocy-H2-uoa" secondAttribute="bottom" constant="90" id="ikd-2x-qFw"/>
-                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="centerX" secondItem="z96-qC-TBE" secondAttribute="centerX" id="ncG-xc-llP"/>
-                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="leading" secondItem="9dW-EH-fXB" secondAttribute="leading" constant="53" id="tvm-f4-rkv"/>
+                            <constraint firstItem="ocy-H2-uoa" firstAttribute="leading" secondItem="9dW-EH-fXB" secondAttribute="leading" constant="133" id="2nd-fO-zbq"/>
+                            <constraint firstItem="Dga-qY-dI1" firstAttribute="top" secondItem="Ds8-7d-NnH" secondAttribute="bottom" constant="35" id="4ss-sQ-hcQ"/>
+                            <constraint firstItem="Dga-qY-dI1" firstAttribute="leading" secondItem="ebY-Vr-d9J" secondAttribute="leading" id="8pL-FD-Cgu"/>
+                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="leading" secondItem="Dga-qY-dI1" secondAttribute="leading" id="G8H-nh-sI5"/>
+                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="trailing" secondItem="Dga-qY-dI1" secondAttribute="trailing" id="GZP-tC-BKe"/>
+                            <constraint firstItem="9dW-EH-fXB" firstAttribute="bottom" secondItem="ocy-H2-uoa" secondAttribute="bottom" constant="52" id="Mfe-1G-g1R"/>
+                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="top" secondItem="9dW-EH-fXB" secondAttribute="top" constant="44" id="PuM-5O-6Yc"/>
+                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="leading" secondItem="9dW-EH-fXB" secondAttribute="leading" constant="53" id="THC-CW-0yb"/>
+                            <constraint firstItem="ocy-H2-uoa" firstAttribute="top" secondItem="ebY-Vr-d9J" secondAttribute="bottom" constant="45" id="g1L-NR-UWz"/>
+                            <constraint firstItem="ebY-Vr-d9J" firstAttribute="top" secondItem="Dga-qY-dI1" secondAttribute="bottom" constant="31" id="sEs-gS-gs3"/>
+                            <constraint firstItem="ebY-Vr-d9J" firstAttribute="centerX" secondItem="ocy-H2-uoa" secondAttribute="centerX" id="sI9-ze-KJq"/>
+                            <constraint firstItem="Dga-qY-dI1" firstAttribute="trailing" secondItem="ebY-Vr-d9J" secondAttribute="trailing" id="vAi-7B-MyZ"/>
+                            <constraint firstItem="Ds8-7d-NnH" firstAttribute="centerX" secondItem="z96-qC-TBE" secondAttribute="centerX" id="xiV-JC-xlY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Item" id="lue-gc-Fge"/>
+                    <connections>
+                        <outlet property="categoryLabel" destination="ebY-Vr-d9J" id="nUb-IN-g2p"/>
+                        <outlet property="imageView" destination="Ds8-7d-NnH" id="VEC-KV-eZS"/>
+                        <outlet property="nameLabel" destination="Dga-qY-dI1" id="D2r-8n-9Jc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nXF-ai-aV9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -124,12 +150,12 @@
         <!--ShopList-->
         <scene sceneID="HMX-2T-pDu">
             <objects>
-                <viewController id="liK-de-ykx" sceneMemberID="viewController">
+                <viewController id="liK-de-ykx" customClass="DetailsViewController" customModule="SimpleShopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kqF-Gx-2gO">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MlT-sU-Du5">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MlT-sU-Du5">
                                 <rect key="frame" x="0.0" y="162" width="393" height="622"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -140,7 +166,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nVx-vE-F39">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="colCol" id="nVx-vE-F39" customClass="ColCollectionViewCell" customModule="SimpleShopApp" customModuleProvider="target">
                                         <rect key="frame" x="89" y="0.0" width="215" height="257"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lkE-pk-0F9">
@@ -166,10 +192,17 @@
                                                     <buttonConfiguration key="configuration" style="plain" title="Sepete Ekle">
                                                         <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="ekle:" destination="nVx-vE-F39" eventType="touchUpInside" id="qbv-Zy-BPp"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="215" height="257"/>
+                                        <connections>
+                                            <outlet property="adLabel" destination="NGC-Vi-xec" id="scE-5e-Sl3"/>
+                                            <outlet property="imageView" destination="UO2-o1-Vct" id="o9G-6G-JrJ"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -178,10 +211,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="ShopList" id="cWm-i9-Of6"/>
+                    <connections>
+                        <outlet property="collectionView" destination="MlT-sU-Du5" id="feJ-gd-6dp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pdy-Wj-eF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1804" y="477"/>
+            <point key="canvasLocation" x="1804" y="502"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="o3K-TC-2g3">
@@ -204,6 +240,7 @@
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
+        <image name="select" width="1920" height="1920"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

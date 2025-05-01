@@ -9,4 +9,8 @@ import UIKit
 
 class ColCollectionViewCell: UICollectionViewCell {
     
+    @IBAction func ekle(_ sender: Any) {
+    }
+    @IBOutlet weak var adLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
 }
