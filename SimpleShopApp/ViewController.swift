@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var categories: [Category] = []
+    var categoriesName: [String] = []
+    var categoriesId: [UUID] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,16 +21,57 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         
+        getData()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name("newPlace"), object: nil)
+    }
+    
+    @objc func getData() {
+        
+        categoriesName.removeAll()
+        categoriesId.removeAll()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
+        fetch.returnsObjectsAsFaults = false
+        
+        do {
+            
+            let results = try context.fetch(fetch)
+            
+            for result in results as! [NSManagedObject] {
+                
+                if let title = result.value(forKey: "name") as? String {
+                    categoriesName.append(title)
+                }
+                
+                if let id = result.value(forKey: "id") as? UUID {
+                    categoriesId.append(id)
+                    print(id)
+                }
+                
+            }
+            print("success")
+            
+        }catch{
+            print("error")
+        }
+        
+        
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categoriesName.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        cell.adLabel.text = categories[indexPath.row].name
+        cell.adLabel.text = categoriesName[indexPath.row]
         return cell
     }
 
