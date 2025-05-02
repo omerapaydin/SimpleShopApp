@@ -31,7 +31,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TiS-uZ-giW">
                                                     <rect key="frame" x="116" y="8" width="161" height="45"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="161" id="DSd-4c-DSD"/>
+                                                        <constraint firstAttribute="width" constant="161" id="Nqt-V4-eGg"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -39,9 +39,9 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="TiS-uZ-giW" firstAttribute="centerY" secondItem="VdE-6p-tQm" secondAttribute="centerY" id="lek-nI-jP5"/>
-                                                <constraint firstItem="TiS-uZ-giW" firstAttribute="centerX" secondItem="VdE-6p-tQm" secondAttribute="centerX" id="qH7-K2-6qB"/>
-                                                <constraint firstItem="TiS-uZ-giW" firstAttribute="top" secondItem="VdE-6p-tQm" secondAttribute="topMargin" constant="-3" id="uX8-DE-9Ag"/>
+                                                <constraint firstItem="TiS-uZ-giW" firstAttribute="centerX" secondItem="VdE-6p-tQm" secondAttribute="centerX" id="Kff-lR-cPH"/>
+                                                <constraint firstItem="TiS-uZ-giW" firstAttribute="centerY" secondItem="VdE-6p-tQm" secondAttribute="centerY" id="MaU-Jb-7IS"/>
+                                                <constraint firstItem="TiS-uZ-giW" firstAttribute="top" secondItem="VdE-6p-tQm" secondAttribute="topMargin" constant="-3" id="UXc-i4-o4x"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -54,19 +54,29 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="PqA-Ww-dr9" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Ew9-sM-8Vi"/>
-                            <constraint firstItem="PqA-Ww-dr9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Fp4-D2-RgL"/>
-                            <constraint firstItem="PqA-Ww-dr9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cDy-Cx-NTv"/>
-                            <constraint firstItem="PqA-Ww-dr9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yi7-u8-erW"/>
+                            <constraint firstItem="PqA-Ww-dr9" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="07j-fM-HPF"/>
+                            <constraint firstItem="PqA-Ww-dr9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="M8L-5E-5z3"/>
+                            <constraint firstItem="PqA-Ww-dr9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dh7-o2-bug"/>
+                            <constraint firstItem="PqA-Ww-dr9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zfL-UU-yma"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Category" id="dKA-Yz-82Z">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="bv7-Pc-ASp">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <segue destination="e8h-Uy-r5R" kind="show" identifier="addItem" id="BkJ-Co-aHH"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Add" id="bv7-Pc-ASp">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="addItems:" destination="BYZ-38-t0r" id="UTp-CL-jdi"/>
+                                    <segue destination="e8h-Uy-r5R" kind="show" identifier="addItem" id="BkJ-Co-aHH"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Ctgr" id="qHq-Qd-Fhs">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="addCtgry:" destination="BYZ-38-t0r" id="r2l-J5-Jjc"/>
+                                    <segue destination="PP1-tV-2uZ" kind="show" identifier="addCtgr" id="hKR-Xk-9XV"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="PqA-Ww-dr9" id="UAZ-78-sEM"/>
@@ -76,6 +86,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="979.38931297709917" y="3.5211267605633805"/>
+        </scene>
+        <!--Add Category-->
+        <scene sceneID="K0Q-cJ-DSu">
+            <objects>
+                <viewController id="PP1-tV-2uZ" customClass="AddCtgryViewController" customModule="SimpleShopApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dPv-Sf-Dmg">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1pg-sE-uTM">
+                                <rect key="frame" x="47" y="358" width="299" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="3ZN-iI-sdk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvB-vc-mjb">
+                                <rect key="frame" x="133" y="457" width="126" height="72"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save">
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="save:" destination="PP1-tV-2uZ" eventType="touchUpInside" id="d7X-op-Vo7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kqJ-zn-gce"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kqJ-zn-gce" firstAttribute="bottom" secondItem="wvB-vc-mjb" secondAttribute="bottom" constant="255" id="2Gk-Bo-Uch"/>
+                            <constraint firstItem="1pg-sE-uTM" firstAttribute="centerX" secondItem="wvB-vc-mjb" secondAttribute="centerX" id="5Df-2S-gjl"/>
+                            <constraint firstItem="wvB-vc-mjb" firstAttribute="leading" secondItem="kqJ-zn-gce" secondAttribute="leading" constant="133" id="EwE-Uh-zeB"/>
+                            <constraint firstItem="wvB-vc-mjb" firstAttribute="top" secondItem="1pg-sE-uTM" secondAttribute="bottom" constant="65" id="J33-aH-XUj"/>
+                            <constraint firstItem="wvB-vc-mjb" firstAttribute="centerX" secondItem="dPv-Sf-Dmg" secondAttribute="centerX" id="Vx7-I6-ATb"/>
+                            <constraint firstItem="1pg-sE-uTM" firstAttribute="top" secondItem="kqJ-zn-gce" secondAttribute="top" constant="196" id="d2N-tT-SDk"/>
+                            <constraint firstItem="1pg-sE-uTM" firstAttribute="leading" secondItem="kqJ-zn-gce" secondAttribute="leading" constant="47" id="p73-rM-Kau"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Category" id="MkX-Lo-8RW"/>
+                    <connections>
+                        <outlet property="ctgryField" destination="1pg-sE-uTM" id="mkF-EY-TVw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ho0-m9-vXa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1084.7328244274809" y="-733.09859154929586"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="0xy-6V-Cs5">
@@ -145,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nXF-ai-aV9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1783.9694656488548" y="-164.08450704225353"/>
+            <point key="canvasLocation" x="1982" y="-173"/>
         </scene>
         <!--ShopList-->
         <scene sceneID="HMX-2T-pDu">
