@@ -8,6 +8,8 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
+    
+    var geleId : UUID?
 
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {

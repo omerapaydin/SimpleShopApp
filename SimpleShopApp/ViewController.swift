@@ -14,6 +14,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var categoriesName: [String] = []
     var categoriesId: [UUID] = []
     
+    var selectedCtgryId : UUID?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -73,6 +75,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         cell.adLabel.text = categoriesName[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selectedCtgryId = categoriesId[indexPath.row]
+        performSegue(withIdentifier: "toList", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toList" {
+            let desc = segue.destination as! DetailsViewController
+            desc.geleId = selectedCtgryId
+            
+        }
     }
 
     @IBAction func addCtgry(_ sender: Any) {
